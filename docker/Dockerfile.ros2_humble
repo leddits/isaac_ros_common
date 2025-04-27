@@ -96,6 +96,9 @@ apt-get update && apt-get install -y \
     ros-humble-image-pipeline \
     ros-humble-image-transport \
     ros-humble-image-transport-plugins \
+    ros-humble-isaac-ros-visual-slam \
+    ros-humble-isaac-ros-examples \
+    ros-humble-isaac-ros-realsense \
     ros-humble-launch-xml \
     ros-humble-launch-yaml \
     ros-humble-launch-testing \
@@ -145,9 +148,9 @@ RUN --mount=type=cache,target=/var/cache/apt \
     && git clone https://github.com/osrf/negotiated && cd negotiated && git checkout master \
     && source ${ROS_ROOT}/setup.bash \
     && cd negotiated_interfaces && bloom-generate rosdebian && fakeroot debian/rules binary \
-    && cd ../ && apt-get install -y ./*.deb && rm ./*.deb \
+    && cd ../ && apt-get install -y --allow-downgrades ./*.deb && rm ./*.deb \
     && cd negotiated && bloom-generate rosdebian && fakeroot debian/rules binary \
-    && cd ../ && apt-get install -y ./*.deb && rm ./*.deb
+    && cd ../ && apt-get install -y --allow-downgrades ./*.deb && rm ./*.deb
 
 # Install image_proc from 55bf2a38 with backported resize node fix
 # https://github.com/ros-perception/image_pipeline/pull/786/commits/969d6c763df99b42844742946f7a70c605a72a15
